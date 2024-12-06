@@ -1,0 +1,23 @@
+/* Main Header */
+.main-header {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+/* Sub Header */
+.sub-header {
+    text-align: center;
+    font-size: 20px;
+    color: #555;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+    color: #888;
+}
