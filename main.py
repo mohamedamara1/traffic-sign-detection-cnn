@@ -47,7 +47,7 @@ else:
 # Load the trained model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model('model.h5')  # Adjust path if necessary
+    model = tf.keras.models.load_model('model_augmented.h5')  # Adjust path if necessary
     return model
 
 model = load_model()
