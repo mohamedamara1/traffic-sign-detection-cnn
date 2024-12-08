@@ -69,30 +69,30 @@ if uploaded_file:
 
     # Preprocess the image for prediction
     img = Image.open(uploaded_file)
-    img = img.convert("L")  # Convert to grayscale (1 channel)
-    img = img.resize((90, 90))  # Resize to match the model input size (adjust if needed)
+    img = img.resize((90, 90))  # Resize to match the model input size
     img = np.array(img)  # Convert to numpy array
 
     # Normalize image values to be between 0 and 1 (if required by your model)
     img = img / 255.0  # Adjust based on your model's preprocessing
 
-    # Reshape for CNN (add channel dimension, model expects shape (90, 90, 1))
-    img = np.expand_dims(img, axis=-1)  # Now shape will be (90, 90, 1)
+    # Ensure the image has 3 channels (RGB)
+    if img.shape[-1] != 3:
+        st.warning("The image does not have 3 channels (RGB). Please upload a valid colored image.")
+    else:
+        # Add batch dimension (model expects input of shape (batch_size, height, width, channels))
+        img = np.expand_dims(img, axis=0)  # Now shape will be (1, 90, 90, 3)
 
-    # Add batch dimension (model expects input of shape (batch_size, height, width, channels))
-    img = np.expand_dims(img, axis=0)  # Now shape will be (1, 90, 90, 1)
+        # Predict using the trained model
+        prediction = model.predict(img)
 
-    # Predict using the trained model
-    prediction = model.predict(img)
+        # Get the predicted class index
+        predicted_class = np.argmax(prediction)  # Get the class with the highest probability
 
-    # Get the predicted class index
-    predicted_class = np.argmax(prediction)  # Get the class with the highest probability
+        # Map the predicted class to its corresponding label
+        predicted_class_name = class_names[predicted_class]
 
-    # Map the predicted class to its corresponding label
-    predicted_class_name = class_names[predicted_class]
-
-    # Display the prediction (class name)
-    st.write(f"Predicted Class: {predicted_class_name}")
+        # Display the prediction (class name)
+        st.write(f"Predicted Class: {predicted_class_name}")
 
 else:
     st.info("Please upload an image to get started.")
