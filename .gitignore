@@ -1,2 +1,6 @@
 DataSet*
 .ipynb_checkpoints
+archive/
+images/
+logs/
+models/
