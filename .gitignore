@@ -7,3 +7,4 @@ models/
 yolov8-road-sign-detection-pytorch-default-v1.tar.gz
 yolov8-road-sign-detection-pytorch-default-v1/*
 archive
+best*
