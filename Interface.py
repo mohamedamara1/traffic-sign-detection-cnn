@@ -54,7 +54,7 @@ yolo_model = load_yolo_model()
 # Load the trained CNN model
 @st.cache_resource
 def load_cnn_model():
-    return tf.keras.models.load_model('models/model_vf.keras')
+    return tf.keras.models.load_model('models/model.keras')
 
 cnn_model = load_cnn_model()
 
