@@ -72,11 +72,12 @@ st.write("Upload an image of a traffic sign, and the model will classify it for 
 
 uploaded_file = st.file_uploader("Choose an image file", type=["png", "jpg", "jpeg"])
 if uploaded_file:
-    # Preprocess the uploaded image for YOLO
     img = Image.open(uploaded_file)
+
+    if img.mode != "RGB":
+        img = img.convert("RGB")
     img_array = np.array(img)  
 
-    # Perform detection with YOLO
     results = yolo_model(img_array)
     detections = results[0].boxes.xyxy.cpu().numpy() 
 
